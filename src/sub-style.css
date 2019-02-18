@@ -1,0 +1,44 @@
+@font-face {
+    font-family: "Simplifica";
+    src: url(../content/fonts/SIMPLIFICA\ Typeface.ttf) format("truetype");
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+    font-size: 16px;
+    font-family: "Simplifica", sans-serif;
+    font-weight: 400;
+    line-height: 1.8em;
+    color: white;
+    background-color: rgb(30, 38, 75)
+}
+
+.parallax {
+    background-image: url(../content/pic/bg.jpg);
+    min-height: 400px;
+    position: relative;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.parallax-text {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 50px;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+}
+
+.parallax-text .border {
+    background-color: transparent;
+    color: white;
+    padding: 20px;
+    border-style: solid;
+    border-width: 2px;
+}
