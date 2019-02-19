@@ -7,6 +7,8 @@
             <title>Krzysztof Zoń - Moje muzyka</title>
     
             <link rel="stylesheet" href="sub-style.css">
+
+            <script src="audio-hover.js"></script>
     </head>
     <body>
         <div class="parallax">
@@ -16,5 +18,22 @@
                 </span>
             </div>
         </div>
+
+        <section class="section-content">
+            <div class="btn-container">
+                <div class="box"> 
+                    <img src="../content/music/creosote.png" onmouseover="creosote.play()" onmouseout="creosote.pause()">
+                </div>
+                <div class="box"> 
+                    <img src="../content/music/pov.png" onmouseover="pov.play()" onmouseout="pov.pause()">
+                </div>
+            </div>
+        </section>
+
+        <div class="second-parallax"></div>
+
+        <footer>
+                <p>Autor:Krzysztof Zoń krzysztof.zon2001@gmail.com - wszelkie prawa zastrzeżone</p>
+        </footer>
     </body>
 </html>
