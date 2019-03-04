@@ -236,4 +236,8 @@ footer {
     z-index: 9;
 }
 
-/* */
+/* INFORMACJE */
+
+.info {
+    list-style-type: none;
+}
