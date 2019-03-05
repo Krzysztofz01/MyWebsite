@@ -58,6 +58,10 @@ body, html {
     padding:50px 50px;
 }
 
+.section-content a {
+    text-decoration: none;
+}
+
 .section-title {
     font-size: 13px;
     letter-spacing: 8px;
