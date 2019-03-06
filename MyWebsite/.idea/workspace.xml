@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f43ab7b5-239b-448c-a827-0d9258e2413c" name="Default Changelist" comment="" />
+    <list default="true" id="c4d7d2b5-7a17-4f63-9686-54dfa059bad1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyWebsite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/MyWebsite/settings.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -11,22 +14,19 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MyWebsite/settings.py">
+        <entry file="file://$PROJECT_DIR$/galeria/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="34" column="26" lean-forward="true" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
+            <state relative-caret-position="155">
+              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/MyWebsite/urls.py">
+        <entry file="file://$PROJECT_DIR$/MyWebsite/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
-              <folding>
-                <element signature="e#633#665#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="515">
+              <caret line="39" column="14" selection-start-line="39" selection-start-column="14" selection-end-line="39" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -36,7 +36,15 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/galeria/models.py" />
+        <option value="$PROJECT_DIR$/MyWebsite/settings.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="360" />
     <option name="y" value="148" />
     <option name="width" value="1400" />
@@ -48,7 +56,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -59,12 +66,18 @@
             <path>
               <item name="MyWebsite" type="b2602c69:ProjectViewProjectNode" />
               <item name="MyWebsite" type="462c0819:PsiDirectoryNode" />
+              <item name="galeria" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MyWebsite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MyWebsite" type="462c0819:PsiDirectoryNode" />
               <item name="MyWebsite" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -87,11 +100,11 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f43ab7b5-239b-448c-a827-0d9258e2413c" name="Default Changelist" comment="" />
-      <created>1551885411381</created>
+      <changelist id="c4d7d2b5-7a17-4f63-9686-54dfa059bad1" name="Default Changelist" comment="" />
+      <created>1551889628061</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1551885411381</updated>
+      <updated>1551889628061</updated>
     </task>
     <servers />
   </component>
@@ -102,9 +115,9 @@
       <window_info id="Favorites" side_tool="true" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24973656" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" weight="0.32900432" />
-      <window_info anchor="bottom" id="Python Console" weight="0.32900432" />
-      <window_info anchor="bottom" id="Terminal" visible="true" weight="0.267316" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Python Console" />
+      <window_info anchor="bottom" id="Terminal" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -119,29 +132,17 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/MyWebsite/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyWebsite/wsgi.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manage.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyWebsite/settings.py">
+    <entry file="file://$PROJECT_DIR$/galeria/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="34" column="26" lean-forward="true" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
+        <state relative-caret-position="155">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MyWebsite/urls.py">
+    <entry file="file://$PROJECT_DIR$/MyWebsite/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
-          <folding>
-            <element signature="e#633#665#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="515">
+          <caret line="39" column="14" selection-start-line="39" selection-start-column="14" selection-end-line="39" selection-end-column="14" />
         </state>
       </provider>
     </entry>
