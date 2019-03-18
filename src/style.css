@@ -208,7 +208,7 @@ footer {
     height: 100%;
 }
 
-#i1, #i2, #i3, #i4, #i5, #i6, #i7, #i8 {
+#i1, #i2, #i3, #i4, #i5, #i6, #i7, #i8, #i9 {
     display: none;
 }
 
@@ -241,7 +241,8 @@ footer {
 #i5:checked ~ #five,
 #i6:checked ~ #six,
 #i7:checked ~ #seven,
-#i8:checked ~ #eight {
+#i8:checked ~ #eight,
+#i9:checked ~ #nine {
     z-index: 9;
 }
 
