@@ -18,7 +18,7 @@ body, html {
 
 /* PARALAX AND MAIN LAYOUT */
 
-.main-paralax, .pass-paralax {
+.main-paralax, .pass-paralax, .repo-paralax {
     background-image: url('content/pic/bg.jpg');
     position: relative;
     background-position: center;
@@ -33,6 +33,10 @@ body, html {
 
 .pass-paralax {
     min-height: 250px;
+}
+
+.repo-paralax {
+    min-height: 100px;
 }
 
 .main-title {
