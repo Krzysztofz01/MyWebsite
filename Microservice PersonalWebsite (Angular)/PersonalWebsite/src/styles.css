@@ -1,0 +1,137 @@
+body {
+    font-family: 'Quicksand', sans-serif !important;
+}
+
+/* === NAVBAR === */
+.navbar-dark {
+    color: #fff;
+    background-color: #393e46 !important;
+}
+
+.navbar-brand {
+    color: #fff;
+    letter-spacing: 5px;
+}
+
+.nav-link {
+    color: #fff !important;
+}
+
+.nav-link:hover {
+    color: #fff !important;
+}
+
+/* === CAROUSEL === */
+.carousel-caption {
+    top: 45%;
+}
+
+.carousel-inner img {
+    width: 100%;
+    min-height: 100% !important;
+    height: 100vh !important;
+    object-fit: cover;
+}
+
+.border-container {
+    width: max-content;
+    margin: auto;
+    border: 2px solid #fff;
+    padding: 10px;
+}
+
+.carousel-caption h5 {
+    text-align: center;
+    font-size: 48px;
+    letter-spacing: 6px;
+    text-shadow: 0px 3px 15px rgba(0,0,0,0.5);
+}
+
+.carousel-caption p {
+    width: 75%;
+    margin: auto;
+    font-size: 18px;
+    text-shadow: 0px 3px 15px rgba(0,0,0,0.5);
+}
+
+/* === JUMBOTRON === */
+.jumbotron {
+    font-weight: 300;
+    background-color: #fff !important;
+    color: #393e46 !important;
+}
+
+/* === PARALLAX === */
+.parallax {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax h1 {
+    letter-spacing: 5px;
+    color: #fff !important;
+}
+
+.heading-parallax-border {
+    border: 2px solid #fff;;
+    padding: 0px;
+    width: max-content;
+    margin: auto;
+    padding: 10px;
+}
+
+.parallax-image-one {
+    background-image: url("./assets/bg-image-1.jpg");
+}
+
+.parallax-image-two {
+    background-image: url("./assets/bg-image-3.jpg");
+}
+
+/* === CARDS === */
+.card-ext-link, .card-ext-link:hover {
+    text-decoration: none;
+    color: #393e46;
+}
+
+/* === SOCIAL === */
+.social a {
+    font-size: 4.5rem;
+    padding: 3rem;
+}
+
+.social i {
+    color: #393e46
+}
+
+/*.social .fa-instagram {
+    color: #833AB4;
+}
+
+.social .fa-twitter {
+    color: #1DA1F2
+}
+
+.social .fa-deviantart {
+    color: #00e59c;
+}
+
+.social .fa-github {
+    color: #333;
+}
+
+.social .fa-stack-overflow {
+    color: #f48024;
+}
+
+.social .fa-soundcloud {
+    color: #ff3300;
+}*/
+
+/* ==FOOTER== */
+footer {
+    color: #fff;
+    background-color: #393e46;
+}
