@@ -1,53 +1,22 @@
 version: '3'
 services:
-    ms_reverse_proxy:
-        image: nginx:1.17.10
-        container_name: ms_reverse_proxy
-        depends_on: 
-            - ms_accesspointmap_db
-            - ms_accesspointmap_api
-            - ms_accesspointmap_front
-            - ms_portfolio_front
-        volumes:
-            - ./ms_reverse_proxy/nginx.conf:/etc/nginx/nginx.conf
-        ports:
-            - 80:80
-    ms_cdn_service:
-        image: nginx:1.17.10
-        container_name: ms_cdn_server
-        volumes:
-            - ./ms_cdn_service/nginx.conf:/etc/nginx/nginx.conf
-            - ./Volume/Images:/var/www/data/images
-        ports:
-            - 3003:80   
-    ms_portfolio_front:
-        container_name: ms_portfolio_front
-        build: ./ms_portfolio_front
-        ports:
-            - "3000:3000"
-        restart: on-failure
-    ms_accesspointmap_db:
-        container_name: ms_accesspointmap_db
-        build: ./ms_accesspointmap_db
-        volumes: 
-            - ./Volume/AccessPointMapDatabase:/var/opt/mssql
-        ports:
-            - "3202:1433"
-        restart: on-failure
-    ms_accesspointmap_api:
-        container_name: ms_accesspointmap_api
-        build: ./ms_accesspointmap_api/ms_accesspointmap_api
-        ports:
-            - "3201:80"
-        depends_on:
-            - ms_accesspointmap_db
-        restart: on-failure
-    ms_accesspointmap_front:
-        container_name: ms_accesspointmap_front
-        build: ./ms_accesspointmap_front
-        ports:
-            - "3200:3200"
-        depends_on: 
-            - ms_accesspointmap_db
-            - ms_accesspointmap_api
-        restart: on-failure
+  accesspointmap-db:
+    build: ./ms_accesspointmap_db
+    volumes:
+      - ./apm-db:/var/opt/mssql/data
+    ports:
+      - "1433:1433"
+  accesspointmap-api:
+    build: ./AccessPointMapWebApi/AccessPointMapWebApi
+    ports:
+      - "3201:80"
+  server-cds:
+    build: ./cds
+    volumes: 
+      - ./cds-files:/usr/src/app/images
+    ports:
+      - "3005:80"
+volumes:
+  apm-db:
+  cds-files:
+  
