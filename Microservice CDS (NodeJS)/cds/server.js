@@ -12,6 +12,13 @@ app.use('/images', express.static(imageFilesPath), serveIndex(imageFilesPath, {
     view: 'details'
 }));
 
+const projectsFilesPath = path.join(__dirname, 'projects');
+app.use('/projects', express.static(projectsFilesPath), serveIndex(projectsFilesPath, {
+    hidden: false,
+    icons: true,
+    view: 'details'
+}));
+
 app.get('/', (req, res) => {
     res.send('Content Delivery Network. Time:' + Date.now());
 });

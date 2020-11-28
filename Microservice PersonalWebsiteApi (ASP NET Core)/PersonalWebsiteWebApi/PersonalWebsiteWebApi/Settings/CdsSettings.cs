@@ -2,7 +2,7 @@
 {
     public class CdsSettings
     {
-        public string BaseUrlDev { get; set; }
-        public string BaseUrlDocker { get; set; }
+        public string BaseUrlImages { get; set; }
+        public string BaseUrlProjects { get; set; }
     }
 }

@@ -1,3 +1,5 @@
+using Hangfire;
+using Hangfire.MemoryStorage;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +10,7 @@ using PersonalWebsiteWebApi.DatabaseContext;
 using PersonalWebsiteWebApi.Repositories;
 using PersonalWebsiteWebApi.Services;
 using PersonalWebsiteWebApi.Settings;
+using System;
 
 namespace PersonalWebsiteWebApi
 {
@@ -35,6 +38,14 @@ namespace PersonalWebsiteWebApi
 
             //Services
             services.AddTransient<IGithubProjectUpdaterService, GithubProjectUpdaterService>();
+            services.AddTransient<IGalleryIndexerService, GalleryIndexerService>();
+
+            //Hangfire Job Server
+            services.AddHangfire(conf => 
+                conf.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+                .UseSimpleAssemblyNameTypeSerializer()
+                .UseDefaultTypeSerializer()
+                .UseMemoryStorage());
 
             //HttpClient
             services.AddHttpClient();
@@ -43,7 +54,12 @@ namespace PersonalWebsiteWebApi
             services.AddControllers();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(
+            IApplicationBuilder app,
+            IWebHostEnvironment env,
+            IRecurringJobManager recurringJobManager,
+            IBackgroundJobClient backgroundJobClient,
+            IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -58,6 +74,27 @@ namespace PersonalWebsiteWebApi
             {
                 endpoints.MapControllers();
             });
+
+
+            //Hangfire Server
+            app.UseHangfireServer();
+
+            //Fire-and-forget
+            backgroundJobClient.Enqueue(() => serviceProvider.GetService<IGithubProjectUpdaterService>().Update());
+            backgroundJobClient.Enqueue(() => serviceProvider.GetService<IGalleryIndexerService>().IndexGalleryImages());
+
+            //Daily jobs
+            recurringJobManager.AddOrUpdate(
+                "Update Github projects",
+                () => serviceProvider.GetService<IGithubProjectUpdaterService>().Update(),
+                Cron.Daily,
+                TimeZoneInfo.Local);
+
+            recurringJobManager.AddOrUpdate(
+                "Index files on CDS",
+                () => serviceProvider.GetService<IGalleryIndexerService>().IndexGalleryImages(),
+                Cron.Daily,
+                TimeZoneInfo.Local);
         }
     }
 }

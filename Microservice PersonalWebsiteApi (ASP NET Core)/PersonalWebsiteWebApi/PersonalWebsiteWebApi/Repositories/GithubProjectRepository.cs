@@ -77,7 +77,7 @@ namespace PersonalWebsiteWebApi.Repositories
 
         private string CombineUrlImage(string projectName)
         {
-            return cdsSettings.BaseUrlDev + "/images/" + projectName + ".jpg";
+            return cdsSettings.BaseUrlProjects + "/" + projectName + ".jpg";
         }
     }
 }
