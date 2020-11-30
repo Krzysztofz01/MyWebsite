@@ -26,7 +26,7 @@ namespace PersonalWebsiteWebApi.Repositories
         {
             var imagesDto = new List<GalleryImageDto>();
 
-            var images = await context.GalleryImages.Where(x => x.Display == true).ToListAsync();
+            var images = await context.GalleryImages.Where(x => x.Display == true && x.FileExist == true).ToListAsync();
             foreach (var image in images) imagesDto.Add(new GalleryImageDto() { ImageUrl = image.ImageUrl, Category = image.Category });
 
             return imagesDto;
@@ -34,7 +34,21 @@ namespace PersonalWebsiteWebApi.Repositories
 
         public async Task PushImages(IEnumerable<GalleryImage> images)
         {
-            context.GalleryImages.AddRange(images);
+            var allImages = await context.GalleryImages.ToArrayAsync();
+            foreach(var image in allImages)
+            {
+                image.FileExist = false;
+                var currentImage = images.Where(x => x.ImageUrl == image.ImageUrl).FirstOrDefault();
+                if(currentImage != null)
+                {
+                    image.FileExist = true;
+                }
+                context.Entry(image).State = EntityState.Modified;
+            }
+
+            var newImages = images.Where(x => !allImages.Any(z => z.ImageUrl == x.ImageUrl)).ToList();
+            context.GalleryImages.AddRange(newImages);
+
             await context.SaveChangesAsync();
         }
     }

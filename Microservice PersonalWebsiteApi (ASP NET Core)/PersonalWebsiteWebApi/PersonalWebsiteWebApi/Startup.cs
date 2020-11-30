@@ -40,6 +40,12 @@ namespace PersonalWebsiteWebApi
             services.AddTransient<IGithubProjectUpdaterService, GithubProjectUpdaterService>();
             services.AddTransient<IGalleryIndexerService, GalleryIndexerService>();
 
+            //Cross-Origin Resource Sharing
+            services.AddCors(o => o.AddPolicy("DefaultPolicy", builder =>
+            {
+                builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+            }));
+
             //Hangfire Job Server
             services.AddHangfire(conf => 
                 conf.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
@@ -66,6 +72,8 @@ namespace PersonalWebsiteWebApi
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors("DefaultPolicy");
+
             app.UseRouting();
 
             app.UseAuthorization();
@@ -74,7 +82,6 @@ namespace PersonalWebsiteWebApi
             {
                 endpoints.MapControllers();
             });
-
 
             //Hangfire Server
             app.UseHangfireServer();
@@ -93,7 +100,7 @@ namespace PersonalWebsiteWebApi
             recurringJobManager.AddOrUpdate(
                 "Index files on CDS",
                 () => serviceProvider.GetService<IGalleryIndexerService>().IndexGalleryImages(),
-                Cron.Daily,
+                Cron.Hourly,
                 TimeZoneInfo.Local);
         }
     }

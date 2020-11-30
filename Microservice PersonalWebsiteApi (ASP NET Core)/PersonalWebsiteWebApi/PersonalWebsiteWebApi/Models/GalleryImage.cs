@@ -10,6 +10,7 @@ namespace PersonalWebsiteWebApi.Models
         public string ImageUrl { get; set; }
         public string Category { get; set; }
         public bool? Display { get; set; }
+        public bool? FileExist { get; set; }
         public DateTime? CreateDate { get; set; }
     }
 

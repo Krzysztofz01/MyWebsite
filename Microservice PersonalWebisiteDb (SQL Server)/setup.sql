@@ -22,6 +22,7 @@ CREATE TABLE GalleryImages (
     [ImageUrl] VARCHAR(300) NOT NULL,
     [Category] VARCHAR(50) NOT NULL,
     [Display] BIT DEFAULT 1,
+    [FileExist] BIT DEFAULT 1,
     [CreateDate] DATETIME2(6) DEFAULT GETDATE()
 );
 

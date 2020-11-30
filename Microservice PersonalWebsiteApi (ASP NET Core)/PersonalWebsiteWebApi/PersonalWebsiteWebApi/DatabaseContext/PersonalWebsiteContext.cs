@@ -40,6 +40,8 @@ namespace PersonalWebsiteWebApi.DatabaseContext
 
                 entity.Property(e => e.Display).HasDefaultValueSql("((1))");
 
+                entity.Property(e => e.FileExist).HasDefaultValueSql("((1))");
+
                 entity.Property(e => e.ImageUrl)
                     .IsRequired()
                     .HasMaxLength(300)
