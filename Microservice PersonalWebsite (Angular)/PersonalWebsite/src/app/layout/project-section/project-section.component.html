@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row text-center">
+        <div class="col-12 my-5 d-none d-lg-block">
+            <div class="heading-parallax-border">
+                <h1>PROGRAMMING PROJECTS</h1>
+            </div>
+        </div>
+        <div class="col-12 my-5 d-lg-none">
+            <div class="heading-parallax-border">
+                <h4>PROGRAMMING PROJECTS</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div *ngFor="let project of projects" class="col-md-12 col-lg-6 my-5">
+            <a class="card-ext-link" href="{{ project.htmlUrl }}" target="_blank">
+                <div class="card h-100">
+                    <!-- {{ project.imageUrl }} -->
+                    <img class="card-img-top card-img-animation" src="./assets/alchemy-logo.png" alt="{{ project.name }} Image">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ project.name }}</h5>
+                        <p class="card-text">{{ project.description }}</p>
+                    
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated: {{ project.projectUpdated }}</small>
+                    </div>
+                </div>
+            </a>  
+        </div>
+    </div>
+</div>

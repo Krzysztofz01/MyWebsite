@@ -69,7 +69,7 @@ body {
     background-size: cover;
 }
 
-.parallax h1 {
+.parallax h1, h4 {
     letter-spacing: 5px;
     color: #fff !important;
 }
@@ -96,6 +96,14 @@ body {
     color: #393e46;
 }
 
+.card-img-animation {
+    transition: transform 1.5s;
+}
+
+.card-img-animation:hover {
+    transform: scale(0.75);
+}
+
 /* === SOCIAL === */
 .social a {
     font-size: 4.5rem;
@@ -104,6 +112,14 @@ body {
 
 .social i {
     color: #393e46
+}
+
+.social-zoom {
+    transition: transform .2s;
+}
+
+.social-zoom:hover {
+    transform: scale(1.1);
 }
 
 /*.social .fa-instagram {
