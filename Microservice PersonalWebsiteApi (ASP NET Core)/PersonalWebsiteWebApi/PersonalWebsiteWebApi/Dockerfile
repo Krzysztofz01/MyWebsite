@@ -6,7 +6,7 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["PersonalWebsiteWebApi/PersonalWebsiteWebApi.csproj", "PersonalWebsiteWebApi/"]
+COPY . PersonalWebsiteWebApi/
 RUN dotnet restore "PersonalWebsiteWebApi/PersonalWebsiteWebApi.csproj"
 COPY . .
 WORKDIR "/src/PersonalWebsiteWebApi"

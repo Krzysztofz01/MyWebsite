@@ -5,18 +5,36 @@ services:
     volumes:
       - ./apm-db:/var/opt/mssql/data
     ports:
-      - "1433:1433"
+      - "1401:1433"
   accesspointmap-api:
     build: ./AccessPointMapWebApi/AccessPointMapWebApi
     ports:
       - "3201:80"
+    depends_on:
+      - accesspointmap-db
   server-cds:
     build: ./cds
     volumes: 
-      - ./cds-files:/usr/src/app/images
+      - ./cds-files-images:/usr/src/app/images
+      - ./cds-files-projects:/usr/src/app/projects
     ports:
-      - "3005:80"
+      - "3005:3005"
+  personal-db:
+    build: ./ms_personal_db
+    volumes:
+      - ./personal-db:/var/opt/mssql/data
+    ports:
+      - "1402:1433"
+  personal-api:
+    build: ./PersonalWebsiteWebApi/PersonalWebsiteWebApi
+    ports:
+      - "3004:80"
+    depends_on: 
+      - server-cds
+      - personal-db
 volumes:
   apm-db:
-  cds-files:
+  personal-db:
+  cds-files-images:
+  cds-files-projects:
   
