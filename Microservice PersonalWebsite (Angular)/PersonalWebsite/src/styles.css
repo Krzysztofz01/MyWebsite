@@ -6,6 +6,7 @@ body {
 .navbar-dark {
     color: #fff;
     background-color: #393e46 !important;
+    box-shadow: 0 0.5rem 0.5rem rgba(0,0,0,.1);
 }
 
 .navbar-brand {
@@ -20,6 +21,25 @@ body {
 .nav-link:hover {
     color: #fff !important;
 }
+
+.type-animation-text {
+    border-right: 1px solid #fff;
+    margin: auto 0;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: 
+        typewriter 1.5s steps(30) 1s 1 normal both,
+        blinkTextCursor 500ms steps(44) infinite normal;
+}
+
+@keyframes typewriter{
+    from{width: 0;}
+    to{width: 100%;}
+  }
+  @keyframes blinkTextCursor{
+    from{border-right-color: #fff;}
+    to{border-right-color: transparent;}
+  }
 
 /* === CAROUSEL === */
 .carousel-caption {
@@ -121,30 +141,6 @@ body {
 .social-zoom:hover {
     transform: scale(1.1);
 }
-
-/*.social .fa-instagram {
-    color: #833AB4;
-}
-
-.social .fa-twitter {
-    color: #1DA1F2
-}
-
-.social .fa-deviantart {
-    color: #00e59c;
-}
-
-.social .fa-github {
-    color: #333;
-}
-
-.social .fa-stack-overflow {
-    color: #f48024;
-}
-
-.social .fa-soundcloud {
-    color: #ff3300;
-}*/
 
 /* ==FOOTER== */
 footer {

@@ -27,7 +27,5 @@ export class ProjectSectionComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
-    console.log(this.projects);
-  }
+  ngOnInit(): void { }
 }

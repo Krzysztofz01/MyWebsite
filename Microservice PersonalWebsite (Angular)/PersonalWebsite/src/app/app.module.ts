@@ -6,12 +6,18 @@ import { AppComponent } from './app.component';
 import { ApiCommunicationService } from './services/api-communication.service';
 import { ProjectSectionComponent } from './layout/project-section/project-section.component';
 import { GallerySectionComponent } from './layout/gallery-section/gallery-section.component';
+import { CommercialSectionComponent } from './layout/commercial-section/commercial-section.component';
+import { ArtSectionComponent } from './layout/art-section/art-section.component';
+import { SocialmediaSectionComponent } from './layout/socialmedia-section/socialmedia-section.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProjectSectionComponent,
-    GallerySectionComponent
+    GallerySectionComponent,
+    CommercialSectionComponent,
+    ArtSectionComponent,
+    SocialmediaSectionComponent
   ],
   imports: [
     BrowserModule,

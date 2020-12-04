@@ -15,8 +15,8 @@
         <div *ngFor="let project of projects" class="col-md-12 col-lg-6 my-5">
             <a class="card-ext-link" href="{{ project.htmlUrl }}" target="_blank">
                 <div class="card h-100">
-                    <!-- {{ project.imageUrl }} -->
-                    <img class="card-img-top card-img-animation" src="./assets/alchemy-logo.png" alt="{{ project.name }} Image">
+                    <!-- ./assets/alchemy-logo.png-->
+                    <img class="card-img-top card-img-animation" src="{{ project.imageUrl }}" alt="{{ project.name }} Image">
                     <div class="card-body">
                         <h5 class="card-title">{{ project.name }}</h5>
                         <p class="card-text">{{ project.description }}</p>
