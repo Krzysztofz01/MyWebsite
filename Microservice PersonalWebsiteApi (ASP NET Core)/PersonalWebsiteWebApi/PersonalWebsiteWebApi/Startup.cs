@@ -87,8 +87,8 @@ namespace PersonalWebsiteWebApi
             app.UseHangfireServer();
 
             //Fire-and-forget
-            backgroundJobClient.Enqueue(() => serviceProvider.GetService<IGithubProjectUpdaterService>().Update());
-            backgroundJobClient.Enqueue(() => serviceProvider.GetService<IGalleryIndexerService>().IndexGalleryImages());
+            backgroundJobClient.Schedule(() => serviceProvider.GetService<IGithubProjectUpdaterService>().Update(), TimeSpan.FromMinutes(2));
+            backgroundJobClient.Schedule(() => serviceProvider.GetService<IGalleryIndexerService>().IndexGalleryImages(), TimeSpan.FromMinutes(2));
 
             //Daily jobs
             recurringJobManager.AddOrUpdate(
