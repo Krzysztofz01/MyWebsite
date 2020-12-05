@@ -24,5 +24,7 @@
   <script src="assets/jquery-3.4.1.slim.min.js"></script>
   <script src="assets/popper.min.js"></script>
   <script src="assets/bootstrap.min.js"></script>
+  <script src="assets/smooth-scroll.polyfills.min.js"></script>
+  <script>let scroll = new SmoothScroll('a[href*="#"]', {ignore: '[data-scroll-ignore]',clip: true,updateURL: false,offset: (anch, togg) => {return 25}});</script>
 </body>
 </html>

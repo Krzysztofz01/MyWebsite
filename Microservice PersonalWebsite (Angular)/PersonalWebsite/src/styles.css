@@ -42,11 +42,15 @@ body {
   }
 
 /* === CAROUSEL === */
-.carousel-caption {
+.main-slides .carousel-caption {
     top: 45%;
 }
 
-.carousel-inner img {
+#galleryControls {
+    border: 2px solid #fff;
+}
+
+.main-slides .carousel-inner img {
     width: 100%;
     min-height: 100% !important;
     height: 100vh !important;
