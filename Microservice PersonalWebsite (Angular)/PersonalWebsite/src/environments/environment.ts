@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: "http://localhost:3004"
+  apiBaseUrl: "http://localhost:3004",
+  cacheMinutesGithub: 60,
+  cacheMinutesGallery: 60
 };
 
 /*

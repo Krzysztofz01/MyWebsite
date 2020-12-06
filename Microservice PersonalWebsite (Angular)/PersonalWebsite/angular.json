@@ -24,9 +24,16 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/bootstrap.min.css",
+              "src/assets/css2.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/jquery-3.4.1.slim.min.js",
+              "src/assets/popper.min.js",
+              "src/assets/bootstrap.min.js",
+              "src/assets/smooth-scroll.polyfills.min.js"
+            ]
           },
           "configurations": {
             "production": {
