@@ -9,6 +9,7 @@ import { GallerySectionComponent } from './layout/gallery-section/gallery-sectio
 import { CommercialSectionComponent } from './layout/commercial-section/commercial-section.component';
 import { ArtSectionComponent } from './layout/art-section/art-section.component';
 import { SocialmediaSectionComponent } from './layout/socialmedia-section/socialmedia-section.component';
+import { AnimatedDigitComponent } from './layout/animated-digit/animated-digit.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { SocialmediaSectionComponent } from './layout/socialmedia-section/social
     GallerySectionComponent,
     CommercialSectionComponent,
     ArtSectionComponent,
-    SocialmediaSectionComponent
+    SocialmediaSectionComponent,
+    AnimatedDigitComponent
   ],
   imports: [
     BrowserModule,

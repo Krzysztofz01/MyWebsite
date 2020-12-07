@@ -11,16 +11,14 @@
             </div>
         </div>
     </div>
-    <div class="row d-flex justify-content-center">
+    <div *ngIf="projects.length > 0;else projects_error_view" class="row d-flex justify-content-center">
         <div *ngFor="let project of projects" class="col-md-12 col-lg-6 my-5">
             <a class="card-ext-link" href="{{ project.htmlUrl }}" target="_blank">
                 <div class="card h-100">
-                    <!-- ./assets/alchemy-logo.png-->
                     <img class="card-img-top card-img-animation" src="{{ project.imageUrl }}" alt="{{ project.name }} Image">
                     <div class="card-body">
                         <h5 class="card-title">{{ project.name }}</h5>
-                        <p class="card-text">{{ project.description }}</p>
-                    
+                        <p class="card-text">{{ project.description }}</p>         
                     </div>
                     <div class="card-footer">
                         <small class="text-muted">Last updated: {{ project.projectUpdated }}</small>
@@ -29,4 +27,11 @@
             </a>  
         </div>
     </div>
+    <ng-template #projects_error_view>
+        <div class="row text-center pb-4">
+            <div class="col">
+                <h4>Projects informations are currently updated ;)</h4>
+            </div>
+        </div>
+    </ng-template>
 </div>

@@ -1,5 +1,5 @@
 <div class="collapse" id="gallery-section">
-    <div id="galleryControls" class="carousel slide gallery-slides" data-ride="carousel">
+    <div *ngIf="images.length > 0;else images_error_view" id="galleryControls" class="carousel slide gallery-slides" data-ride="carousel">
         <div class="carousel-inner">
             <div *ngFor="let image of images; let i=index" [className]="i == 0 ? 'carousel-item active' : 'carousel-item'">
                 <img class="d-block w-100 gallery-image-size" src="{{ image.imageUrl }}" alt="{{ image.imageUrl }}" loading="lazy">
@@ -14,4 +14,7 @@
           <span class="sr-only">Next</span>
         </a>
     </div>
+    <ng-template #images_error_view>
+      <h4>There are no images to show ;)</h4>
+    </ng-template>
 </div>  
