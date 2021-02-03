@@ -5,12 +5,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using PersonalWebsiteWebApi.DatabaseContext;
 using PersonalWebsiteWebApi.Repositories;
 using PersonalWebsiteWebApi.Services;
 using PersonalWebsiteWebApi.Settings;
 using System;
+using System.IO;
 
 namespace PersonalWebsiteWebApi
 {
@@ -27,7 +29,7 @@ namespace PersonalWebsiteWebApi
         {
             //Settings
             services.Configure<GithubSettings>(Configuration.GetSection("GithubSettings"));
-            services.Configure<CdsSettings>(Configuration.GetSection("CdsSettings"));
+            services.Configure<AuthSettings>(Configuration.GetSection("AuthSettings"));
 
             //Database
             services.AddDbContext<PersonalWebsiteContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("PersonalWebsite")));
@@ -38,7 +40,7 @@ namespace PersonalWebsiteWebApi
 
             //Services
             services.AddTransient<IGithubProjectUpdaterService, GithubProjectUpdaterService>();
-            services.AddTransient<IGalleryIndexerService, GalleryIndexerService>();
+            services.AddTransient<IImageFileHandlerService, ImageFileHandlerService>();
 
             //Cross-Origin Resource Sharing
             services.AddCors(o => o.AddPolicy("DefaultPolicy", builder =>
@@ -74,6 +76,12 @@ namespace PersonalWebsiteWebApi
 
             app.UseCors("DefaultPolicy");
 
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "StaticImages")),
+                RequestPath = "/cds/images"
+            });
+
             app.UseRouting();
 
             app.UseAuthorization();
@@ -87,20 +95,13 @@ namespace PersonalWebsiteWebApi
             app.UseHangfireServer();
 
             //Fire-and-forget
-            backgroundJobClient.Schedule(() => serviceProvider.GetService<IGithubProjectUpdaterService>().Update(), TimeSpan.FromMinutes(2));
-            backgroundJobClient.Schedule(() => serviceProvider.GetService<IGalleryIndexerService>().IndexGalleryImages(), TimeSpan.FromMinutes(2));
+            backgroundJobClient.Schedule(() => serviceProvider.GetService<IGithubProjectUpdaterService>().Update(), TimeSpan.FromSeconds(30));
 
             //Daily jobs
             recurringJobManager.AddOrUpdate(
                 "Update Github projects",
                 () => serviceProvider.GetService<IGithubProjectUpdaterService>().Update(),
                 Cron.Daily,
-                TimeZoneInfo.Local);
-
-            recurringJobManager.AddOrUpdate(
-                "Index files on CDS",
-                () => serviceProvider.GetService<IGalleryIndexerService>().IndexGalleryImages(),
-                Cron.Hourly,
                 TimeZoneInfo.Local);
         }
     }

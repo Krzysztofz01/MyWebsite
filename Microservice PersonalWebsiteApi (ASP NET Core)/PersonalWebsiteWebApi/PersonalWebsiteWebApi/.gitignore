@@ -1,0 +1,4 @@
+/bin
+/obj
+StaticImages/*
+!StaticImage/.gitkeep

@@ -9,12 +9,15 @@ namespace PersonalWebsiteWebApi.Repositories
 {
     public interface IGalleryImageRepository
     {
-        Task<List<GalleryImageDto>> GetImages();
-        Task PushImages(IEnumerable<GalleryImage> images);
+        Task<bool> AddImage(GalleryImage image);
+        Task<bool> DeleteImage(int id);
+        Task<GalleryImage> GetImage(int id);
+        Task<IEnumerable<GalleryImageDto>> GetAllImages();
     }
 
     public class GalleryImageRepository : IGalleryImageRepository
     {
+        private readonly string StaticFilesUrl = "cds/images/";
         private readonly PersonalWebsiteContext context;
 
         public GalleryImageRepository(
@@ -22,34 +25,48 @@ namespace PersonalWebsiteWebApi.Repositories
         {
             this.context = context;
         }
-        public async Task<List<GalleryImageDto>> GetImages()
+
+        public async Task<bool> AddImage(GalleryImage image)
         {
-            var imagesDto = new List<GalleryImageDto>();
-
-            var images = await context.GalleryImages.Where(x => x.Display == true && x.FileExist == true).ToListAsync();
-            foreach (var image in images) imagesDto.Add(new GalleryImageDto() { ImageUrl = image.ImageUrl, Category = image.Category });
-
-            return imagesDto;
+            context.Add(image);
+            if(await context.SaveChangesAsync() > 0)
+            {
+                return true;
+            }
+            return false;
         }
 
-        public async Task PushImages(IEnumerable<GalleryImage> images)
+        public async Task<bool> DeleteImage(int id)
         {
-            var allImages = await context.GalleryImages.ToArrayAsync();
-            foreach(var image in allImages)
+            var image = context.GalleryImages.FirstOrDefault(x => x.Id == id);
+            if(image != null)
             {
-                image.FileExist = false;
-                var currentImage = images.Where(x => x.ImageUrl == image.ImageUrl).FirstOrDefault();
-                if(currentImage != null)
-                {
-                    image.FileExist = true;
-                }
-                context.Entry(image).State = EntityState.Modified;
+                context.Entry(image).State = EntityState.Deleted;
+                if (await context.SaveChangesAsync() > 0) return true;
             }
+            return false;
+        }
 
-            var newImages = images.Where(x => !allImages.Any(z => z.ImageUrl == x.ImageUrl)).ToList();
-            context.GalleryImages.AddRange(newImages);
+        public async Task<IEnumerable<GalleryImageDto>> GetAllImages()
+        {
+            var images = await context.GalleryImages.Where(x => x.Display == true).ToListAsync();
+            var dtoContainer = new List<GalleryImageDto>();
 
-            await context.SaveChangesAsync();
+            foreach(var image in images)
+            {
+                dtoContainer.Add(new GalleryImageDto()
+                {
+                    Name = image.Name,
+                    Category = image.Category,
+                    Url = $"{StaticFilesUrl}{image.Filename}"
+                });
+            }
+            return dtoContainer; 
+        }
+
+        public async Task<GalleryImage> GetImage(int id)
+        {
+            return await context.GalleryImages.FirstOrDefaultAsync(x => x.Id == id && x.Display == true);
         }
     }
 }

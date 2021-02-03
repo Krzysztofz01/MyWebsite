@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using PersonalWebsiteWebApi.DatabaseContext;
 using PersonalWebsiteWebApi.Models;
-using PersonalWebsiteWebApi.Settings;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,14 +16,11 @@ namespace PersonalWebsiteWebApi.Repositories
     public class GithubProjectRepository : IGithubProjectRepository
     {
         private readonly PersonalWebsiteContext context;
-        private readonly CdsSettings cdsSettings;
 
         public GithubProjectRepository(
-            PersonalWebsiteContext context,
-            IOptions<CdsSettings> cdsSettings)
+            PersonalWebsiteContext context)
         {
             this.context = context;
-            this.cdsSettings = cdsSettings.Value;
         }
 
         public async Task<List<GithubProject>> GetProjects()
@@ -41,12 +36,6 @@ namespace PersonalWebsiteWebApi.Repositories
                 if(storedProject != null)
                 {
                     bool itemChanged = false;
-
-                    if(storedProject.ImageUrl != project.ImageUrl)
-                    {
-                        storedProject.ImageUrl = project.ImageUrl;
-                        itemChanged = true;
-                    }
 
                     if(storedProject.Description != project.Description)
                     {
@@ -67,17 +56,12 @@ namespace PersonalWebsiteWebApi.Repositories
                 }
                 else
                 {
-                    project.ImageUrl = CombineUrlImage(project.Name);
+                    project.ImageUrl = "default";
                     context.GithubProjects.Add(project);
                 }
             }
 
             await context.SaveChangesAsync();
-        }
-
-        private string CombineUrlImage(string projectName)
-        {
-            return cdsSettings.BaseUrlProjects + "/" + projectName + ".jpg";
         }
     }
 }

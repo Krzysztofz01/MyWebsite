@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 using PersonalWebsiteWebApi.Models;
 using PersonalWebsiteWebApi.Repositories;
 using PersonalWebsiteWebApi.Settings;
-using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -43,7 +42,6 @@ namespace PersonalWebsiteWebApi.Services
             {
                 string responseJson = await response.Content.ReadAsStringAsync();
                 var reponseObjectContainer = JsonConvert.DeserializeObject<List<GithubProject>>(responseJson);
-                Console.WriteLine(reponseObjectContainer);
                 await githubProjectRepository.PushProjects(reponseObjectContainer);
             }
         }

@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 using PersonalWebsiteWebApi.Models;
 
 #nullable disable
@@ -30,7 +28,6 @@ namespace PersonalWebsiteWebApi.DatabaseContext
             modelBuilder.Entity<GalleryImage>(entity =>
             {
                 entity.Property(e => e.Category)
-                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -40,11 +37,12 @@ namespace PersonalWebsiteWebApi.DatabaseContext
 
                 entity.Property(e => e.Display).HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.FileExist).HasDefaultValueSql("((1))");
-
-                entity.Property(e => e.ImageUrl)
-                    .IsRequired()
+                entity.Property(e => e.Filename)
                     .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
             });
 

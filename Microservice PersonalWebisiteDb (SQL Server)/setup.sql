@@ -19,10 +19,10 @@ GO
 
 CREATE TABLE GalleryImages (
     [Id] int NOT NULL PRIMARY KEY IDENTITY(1, 1),
-    [ImageUrl] VARCHAR(300) NOT NULL,
-    [Category] VARCHAR(50) NOT NULL,
+    [Name] VARCHAR(50),
+    [Category] VARCHAR(50),
+    [Filename] VARCHAR(300),
     [Display] BIT DEFAULT 1,
-    [FileExist] BIT DEFAULT 1,
     [CreateDate] DATETIME2(6) DEFAULT GETDATE()
 );
 
