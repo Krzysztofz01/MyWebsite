@@ -11,8 +11,8 @@
             </div>
         </div>
     </div>
-    <div *ngIf="projects.length > 0;else projects_error_view" class="row d-flex justify-content-center">
-        <div *ngFor="let project of projects" class="col-md-12 col-lg-6 my-5">
+    <div *ngIf="projectsContainer.length > 0;else projects_error_view" class="row d-flex justify-content-center">
+        <div *ngFor="let project of projectsContainer" class="col-md-12 col-lg-6 my-5">
             <a class="card-ext-link" href="{{ project.htmlUrl }}" target="_blank">
                 <div class="card h-100">
                     <img class="card-img-top card-img-animation" src="{{ project.imageUrl }}" alt="{{ project.name }} Image">
@@ -21,7 +21,7 @@
                         <p class="card-text">{{ project.description }}</p>         
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted">Last updated: {{ project.projectUpdated }}</small>
+                        <small class="text-muted">Last updated: {{ formatDate(project.projectUpdated) }}</small>
                     </div>
                 </div>
             </a>  

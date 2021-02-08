@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: "http://localhost:3004",
-  cacheMinutesGithub: 60,
-  cacheMinutesGallery: 60
+  apiBaseUrl: "http://localhost:55710",
+  CACHE_IMAGE_ARRAY: 'IMAGE_ARRAY',
+  CACHE_GITHUB_ARRAY: 'PROJECTS_ARRAY'
 };
 
 /*

@@ -1,0 +1,17 @@
+hr {
+    background-color: #393e46 !important;
+    border: none;
+    height: 1px;
+}
+
+h1 {
+    color: #393e46 !important;
+    letter-spacing: 5px;
+    border: 2px solid #393e46 !important;
+}
+
+p {
+    font-size: 1.1em;
+    color: #393e46 !important;
+    letter-spacing: 5px;
+}

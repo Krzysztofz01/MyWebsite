@@ -2,10 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CacheManagerService } from './../../services/cache-manager.service';
 import { ApiCommunicationService } from 'src/app/services/api-communication.service';
 import { Project } from './../../models/project.model';
-import { LocalStorageOptions } from './../../models/local-storage-options.model';
 import { environment } from 'src/environments/environment';
-
-const CACHE_KEY: string = "PROJECTS";
 
 @Component({
   selector: 'project-section',
@@ -13,33 +10,40 @@ const CACHE_KEY: string = "PROJECTS";
   styleUrls: ['./project-section.component.css']
 })
 export class ProjectSectionComponent implements OnInit {
-  projects: Array<Project>;
+  public projectsContainer: Array<Project>;
 
-  constructor(private apiService : ApiCommunicationService,  private cacheService: CacheManagerService) {
-    this.projects = new Array<Project>();
+  constructor(private apiService : ApiCommunicationService,  private cacheService: CacheManagerService) {}
 
-    const cachedData = this.cacheService.load(CACHE_KEY);
-    if(cachedData == null) {
-      this.cacheService.delete(CACHE_KEY);
-      const options : LocalStorageOptions = { key: CACHE_KEY, data: new Array<Project>(), expirationMinutes: environment.cacheMinutesGithub }
-      
-      this.apiService.getGithubProjects().toPromise().then(data => {
-        for(let key in data) {
-          if(data.hasOwnProperty(key)) {
-            const element : Project = data[key];
-            element.projectCreated = new Date(element.projectCreated).toDateString();
-            element.projectUpdated = new Date(element.projectUpdated).toDateString();
-            
-            this.projects.push(data[key]);
-            options.data.push(data[key]);
-          } 
-        }
-        this.cacheService.save(options);
-      });
+  ngOnInit(): void {
+    const projects = this.cacheService.load(environment.CACHE_GITHUB_ARRAY);
+    if(projects == null) {
+      this.apiService.getGithubProjects()
+        .subscribe((response) => {
+          response.forEach(x => {
+            x.imageUrl = `/assets/${ x.name.toLowerCase() }.jpg`;
+          });
+
+          this.projectsContainer = response;
+          this.cacheService.delete(environment.CACHE_GITHUB_ARRAY);
+          this.cacheService.save({
+            key: environment.CACHE_GITHUB_ARRAY,
+            data: response,
+            expirationMinutes: 60
+          });
+        });
     } else {
-      this.projects = cachedData;
+      this.projectsContainer = projects;
     }
   }
 
-  ngOnInit(): void { }
+  public formatDate(date: Date): string {
+    date = new Date(date);
+    const d = date.getDate();
+    const m = date.getMonth() + 1;
+    const y = date.getFullYear();
+    const H = date.getHours();
+    const M = date.getMinutes();
+
+    return `${ (d <= 9) ? '0' + d.toString() : d }.${ (m <= 9) ? '0' + m.toString() : m }.${ y } ${ (H <= 9) ? '0' + H.toString() : H }:${ (M <= 9) ? '0' + M.toString() : M }`;
+  }
 }

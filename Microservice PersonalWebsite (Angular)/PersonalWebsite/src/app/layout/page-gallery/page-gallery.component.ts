@@ -1,0 +1,38 @@
+import { Component, OnInit } from '@angular/core';
+import { Image } from 'src/app/models/image.model';
+import { ApiCommunicationService } from 'src/app/services/api-communication.service';
+import { CacheManagerService } from 'src/app/services/cache-manager.service';
+import { environment } from 'src/environments/environment';
+
+@Component({
+  selector: 'app-page-gallery',
+  templateUrl: './page-gallery.component.html',
+  styleUrls: ['./page-gallery.component.css']
+})
+export class PageGalleryComponent implements OnInit {
+  public imagesContainer: Array<Image>;
+
+  constructor(private apiService : ApiCommunicationService,  private cacheService: CacheManagerService) { }
+
+  ngOnInit(): void {
+    const images = this.cacheService.load(environment.CACHE_IMAGE_ARRAY);
+    if(images == null) {
+      this.apiService.getGalleryImages()
+        .subscribe((response) => {
+          this.imagesContainer = response;
+          this.cacheService.delete(environment.CACHE_IMAGE_ARRAY);
+          this.cacheService.save({
+            key: environment.CACHE_IMAGE_ARRAY,
+            data: response,
+            expirationMinutes: 60
+          });
+        });
+    } else {
+      this.imagesContainer = images;
+    }
+  }
+
+  public combineUrl(path: string): string {
+    return `${ environment.apiBaseUrl }/${ path }`;
+  }
+}

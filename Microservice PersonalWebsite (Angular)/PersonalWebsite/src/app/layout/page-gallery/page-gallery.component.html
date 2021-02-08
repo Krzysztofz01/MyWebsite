@@ -1,0 +1,15 @@
+<div class="container-fluid">
+    <div class="row text-center mt-5">
+        <div class="col-7 mx-auto my-5">
+            <h1>GALLERY</h1>
+        </div>
+    </div>
+
+    <div *ngFor="let image of imagesContainer" class="row text-center mb-5">
+        <div class="col-lg-7 col-md-10 mx-auto">
+            <img class="img-fluid" [src]="combineUrl(image.url)" alt="{{ image.name }}">
+            <p class="mt-1">{{ image.name }}  /  {{ image.category }}</p>
+            <hr class="mt-5">
+        </div>
+    </div>
+</div>
