@@ -1,4 +1,4 @@
 /bin
 /obj
-StaticImages/*
-!StaticImage/.gitkeep
+/StaticImages/*
+!/StaticImage/.gitkeep

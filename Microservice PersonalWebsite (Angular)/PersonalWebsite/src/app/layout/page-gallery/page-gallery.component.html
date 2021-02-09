@@ -7,7 +7,7 @@
 
     <div *ngFor="let image of imagesContainer" class="row text-center mb-5">
         <div class="col-lg-7 col-md-10 mx-auto">
-            <img class="img-fluid" [src]="combineUrl(image.url)" alt="{{ image.name }}">
+            <img class="img-fluid" [src]="combineUrl(image.url)" alt="{{ image.name }}" loading="lazy">
             <p class="mt-1">{{ image.name }}  /  {{ image.category }}</p>
             <hr class="mt-5">
         </div>
