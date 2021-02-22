@@ -1,24 +1,42 @@
 version: '3'
 services:
+  reverse-proxy:
+    build: ./reverse-proxy
+    volumes:
+      - ./gateway-log:/var/log/nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - accesspointmap-app
+      - accesspointmap-api
+      - personal-app
+      - personal-api
+      - keepmesafe-app
   accesspointmap-db:
     build: ./ms_accesspointmap_db
     volumes:
       - ./apm-db:/var/opt/mssql/data
     ports:
       - "1401:1433"
+  accesspointmap-app:
+    build: ./AccesspointMap
+    ports:
+      - "3200:80"
+    depends_on: 
+      - accesspointmap-api
+  accesspointmap-logdb:
+    build: ./ms_accesspointmap_logdb
+    volumes:
+      - ./apm-lob-db:/data/db
+    ports:
+      - "27017:27017"
   accesspointmap-api:
     build: ./AccessPointMapWebApi/AccessPointMapWebApi
     ports:
       - "3201:80"
     depends_on:
       - accesspointmap-db
-  server-cds:
-    build: ./cds
-    volumes: 
-      - ./cds-files-images:/usr/src/app/images
-      - ./cds-files-projects:/usr/src/app/projects
-    ports:
-      - "3005:3005"
+      - accesspointmap-logdb
   personal-db:
     build: ./ms_personal_db
     volumes:
@@ -27,14 +45,27 @@ services:
       - "1402:1433"
   personal-api:
     build: ./PersonalWebsiteWebApi/PersonalWebsiteWebApi
+    volumes:
+      - ./personal-cds:/app/StaticImages
     ports:
-      - "3004:80"
+      - "3101:80"
     depends_on: 
-      - server-cds
       - personal-db
+  personal-app:
+    build: ./PersonalWebsite
+    ports:
+      - "3100:80"
+    depends_on: 
+      - personal-db
+      - personal-api
+  keepmesafe-app:
+    build: ./KeepMeSafe
+    ports:
+      - "3300:80"
 volumes:
   apm-db:
+  apm-lob-db:
   personal-db:
-  cds-files-images:
-  cds-files-projects:
+  personal-cds:
+  gateway-log:
   
