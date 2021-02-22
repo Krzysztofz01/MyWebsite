@@ -56,6 +56,7 @@ namespace PersonalWebsiteWebApi.Repositories
             {
                 dtoContainer.Add(new GalleryImageDto()
                 {
+                    Id = image.Id,
                     Name = image.Name,
                     Category = image.Category,
                     Url = $"{StaticFilesUrl}{image.Filename}"

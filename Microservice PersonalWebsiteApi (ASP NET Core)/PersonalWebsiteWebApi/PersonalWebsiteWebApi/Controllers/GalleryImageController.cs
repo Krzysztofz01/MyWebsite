@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using PersonalWebsiteWebApi.Models;
@@ -36,11 +34,12 @@ namespace PersonalWebsiteWebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<GalleryImage>>> GetAllImages()
+        public async Task<ActionResult<IEnumerable<GalleryImageDto>>> GetAllImages()
         {
             return Ok(await galleryImageRepository.GetAllImages());
         }
 
+        
         [HttpPost]
         public async Task<ActionResult> UploadImage([FromForm]GalleryImageUpload giu)
         {
