@@ -11,10 +11,13 @@ import { environment } from 'src/environments/environment';
 })
 export class PageGalleryComponent implements OnInit {
   public imagesContainer: Array<Image>;
+  public selectPhotographyOnly: boolean;
 
   constructor(private apiService : ApiCommunicationService,  private cacheService: CacheManagerService) { }
 
   ngOnInit(): void {
+    this.selectPhotographyOnly = true;
+
     const images = this.cacheService.load(environment.CACHE_IMAGE_ARRAY);
     if(images == null) {
       this.apiService.getGalleryImages()
@@ -29,6 +32,22 @@ export class PageGalleryComponent implements OnInit {
         });
     } else {
       this.imagesContainer = images;
+    }
+  }
+
+  public select(photography: boolean): void {
+    this.selectPhotographyOnly = photography;
+  }
+
+  public check(category: string): boolean {
+    const ctg = category.toLowerCase();
+    
+    if(this.selectPhotographyOnly) {
+      if(ctg != "design") return true;
+      return false;
+    } else {
+      if(ctg == "design") return true;
+      return false;
     }
   }
 

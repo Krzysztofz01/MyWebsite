@@ -1,0 +1,5 @@
+.repo-link, .repo-link:visited {
+    text-decoration: none;
+    color: #393e46 !important;
+    font-weight: bold !important;
+}

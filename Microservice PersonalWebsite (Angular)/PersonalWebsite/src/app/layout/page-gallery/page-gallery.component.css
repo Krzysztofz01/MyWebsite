@@ -15,3 +15,15 @@ p {
     color: #393e46 !important;
     letter-spacing: 5px;
 }
+
+.btn {
+    background-color: #393e46 !important;
+    color: #fff !important;
+    cursor: pointer;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.cover-art-width {
+    width: 75% !important;
+}

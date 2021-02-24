@@ -3,6 +3,7 @@ import { CacheManagerService } from './../../services/cache-manager.service';
 import { ApiCommunicationService } from 'src/app/services/api-communication.service';
 import { Project } from './../../models/project.model';
 import { environment } from 'src/environments/environment';
+import { env } from 'process';
 
 @Component({
   selector: 'project-section',
@@ -10,7 +11,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./project-section.component.css']
 })
 export class ProjectSectionComponent implements OnInit {
-  public projectsContainer: Array<Project>;
+  public projectsContainer: Array<Project> = [];
 
   constructor(private apiService : ApiCommunicationService,  private cacheService: CacheManagerService) {}
 
@@ -21,6 +22,13 @@ export class ProjectSectionComponent implements OnInit {
         .subscribe((response) => {
           response.forEach(x => {
             x.imageUrl = `/assets/${ x.name.toLowerCase() }.jpg`;
+            
+            const liveProject = environment.liveProjects.find(p => p.name == x.name.toLowerCase());
+            if(liveProject != null) {
+              x.liveUrl = liveProject.url;
+            } else {
+              x.liveUrl = null
+            }
           });
 
           this.projectsContainer = response;
