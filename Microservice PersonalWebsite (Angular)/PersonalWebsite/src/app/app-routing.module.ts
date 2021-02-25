@@ -5,7 +5,8 @@ import { PageMainComponent } from './layout/page-main/page-main.component';
 
 const routes: Routes = [
   { path: '', component: PageMainComponent },
-  { path: 'gallery', component: PageGalleryComponent }
+  { path: 'gallery', component: PageGalleryComponent },
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
