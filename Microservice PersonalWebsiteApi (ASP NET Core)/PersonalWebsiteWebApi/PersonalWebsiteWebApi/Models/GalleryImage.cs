@@ -34,8 +34,14 @@ namespace PersonalWebsiteWebApi.Models
 
         [Required]
         public IFormFile File { get; set; }
+    }
 
+    public class GalleryDisplayDto
+    {
         [Required]
-        public string Token { get; set; }
+        public int Id { get; set; }
+        
+        [Required]
+        public bool Display { get; set; }
     }
 }

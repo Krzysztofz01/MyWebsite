@@ -1,5 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -33,5 +35,23 @@ namespace PersonalWebsiteWebApi.Models
         public bool? Display { get; set; }
 
         public DateTime? CreateDate { get; set; }
+    }
+
+    public class ProjectImageDto
+    {
+        [Required]
+        public int Id { get; set; }
+
+        [Required]
+        public IFormFile File { get; set; }
+    }
+
+    public class ProjectDisplayDto
+    {
+        [Required]
+        public int Id { get; set; }
+
+        [Required]
+        public bool Display { get; set; }
     }
 }

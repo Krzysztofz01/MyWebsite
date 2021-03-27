@@ -18,6 +18,7 @@ namespace PersonalWebsiteWebApi.DatabaseContext
 
         public virtual DbSet<GalleryImage> GalleryImages { get; set; }
         public virtual DbSet<GithubProject> GithubProjects { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -82,6 +83,30 @@ namespace PersonalWebsiteWebApi.DatabaseContext
                 entity.Property(e => e.ProjectCreated).HasPrecision(6);
 
                 entity.Property(e => e.ProjectUpdated).HasPrecision(6);
+            });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.Property(e => e.Active).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasMaxLength(254)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LastLoginDate)
+                    .HasPrecision(6)
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.LastLoginIp)
+                    .HasMaxLength(45)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("('')");
+
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasMaxLength(128)
+                    .IsUnicode(false);
             });
 
             OnModelCreatingPartial(modelBuilder);

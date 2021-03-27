@@ -27,3 +27,12 @@ CREATE TABLE GalleryImages (
 );
 
 GO
+
+CREATE TABLE Users (
+    [Id] int NOT NULL PRIMARY KEY IDENTITY(1, 1),
+    [Password] VARCHAR(128) NOT NULL,
+    [Email] VARCHAR(254) NOT NULL,
+    [Active] BIT DEFAULT 0,
+    [LastLoginDate] DATETIME2(6) DEFAULT GETDATE(),
+    [LastLoginIp] VARCHAR(45) DEFAULT '',
+);

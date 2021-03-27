@@ -1,5 +1,6 @@
 using Hangfire;
 using Hangfire.MemoryStorage;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -7,12 +8,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using PersonalWebsiteWebApi.DatabaseContext;
 using PersonalWebsiteWebApi.Repositories;
 using PersonalWebsiteWebApi.Services;
 using PersonalWebsiteWebApi.Settings;
 using System;
 using System.IO;
+using System.Text;
 
 namespace PersonalWebsiteWebApi
 {
@@ -29,18 +32,19 @@ namespace PersonalWebsiteWebApi
         {
             //Settings
             services.Configure<GithubSettings>(Configuration.GetSection("GithubSettings"));
-            services.Configure<AuthSettings>(Configuration.GetSection("AuthSettings"));
-
+     
             //Database
             services.AddDbContext<PersonalWebsiteContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("PersonalWebsite")));
 
             //Repositories
             services.AddScoped<IGithubProjectRepository, GithubProjectRepository>();
             services.AddScoped<IGalleryImageRepository, GalleryImageRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             //Services
             services.AddTransient<IGithubProjectUpdaterService, GithubProjectUpdaterService>();
             services.AddTransient<IImageFileHandlerService, ImageFileHandlerService>();
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
 
             //Cross-Origin Resource Sharing
             services.AddCors(o => o.AddPolicy("DefaultPolicy", builder =>
@@ -54,6 +58,31 @@ namespace PersonalWebsiteWebApi
                 .UseSimpleAssemblyNameTypeSerializer()
                 .UseDefaultTypeSerializer()
                 .UseMemoryStorage());
+
+            //JWT Authentication
+            var jsonWebTokenSection = Configuration.GetSection("JsonWebTokenSettings");
+            services.Configure<JsonWebTokenSettings>(jsonWebTokenSection);
+
+            var jsonWebTokenConfig = jsonWebTokenSection.Get<JsonWebTokenSettings>();
+            var key = Encoding.ASCII.GetBytes(jsonWebTokenConfig.Secret);
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
 
             //HttpClient
             services.AddHttpClient();
@@ -83,6 +112,8 @@ namespace PersonalWebsiteWebApi
             });
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
