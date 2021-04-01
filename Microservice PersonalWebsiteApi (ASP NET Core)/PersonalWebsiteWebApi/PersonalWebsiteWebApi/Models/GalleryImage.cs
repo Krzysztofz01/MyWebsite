@@ -44,4 +44,13 @@ namespace PersonalWebsiteWebApi.Models
         [Required]
         public bool Display { get; set; }
     }
+
+    public class GalleryShowDisplayDto
+    {
+        public int Id { get; set; }
+        
+        public string Name { get; set; }
+
+        public bool? Display { get; set; }
+    }
 }

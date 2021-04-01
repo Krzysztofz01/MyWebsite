@@ -54,4 +54,15 @@ namespace PersonalWebsiteWebApi.Models
         [Required]
         public bool Display { get; set; }
     }
+
+    public class ProjectShowDisplayDto
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public string ImageUrl { get; set; }
+
+        public bool? Display { get; set; }
+    }
 }

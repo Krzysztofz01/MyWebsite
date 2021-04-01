@@ -52,7 +52,7 @@ namespace PersonalWebsiteWebApi.Controllers
                 image.Save(fileStream, (imageModel.Filename.EndsWith(".jpg") ? ImageFormat.Jpeg : ImageFormat.Png));
                 await galleryImageRepository.AddImage(imageModel);
             }
-            return Ok(Path.Combine(webHostEnvironment.ContentRootPath, imageModel.Filename).ToString());
+            return Ok();
         }
 
         [HttpPost("display")]
@@ -61,6 +61,13 @@ namespace PersonalWebsiteWebApi.Controllers
         {
             if (await galleryImageRepository.ChangeDisplay(form.Id, form.Display)) return Ok();
             return BadRequest();
+        }
+
+        [HttpGet("display")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> ShowDisplay()
+        {
+            return Ok(await galleryImageRepository.ShowDisplay());
         }
     }
 }

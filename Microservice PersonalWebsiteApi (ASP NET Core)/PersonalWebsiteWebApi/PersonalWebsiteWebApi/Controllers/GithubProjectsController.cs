@@ -61,7 +61,7 @@ namespace PersonalWebsiteWebApi.Controllers
                 if (imageUrl == null) return Conflict();
                 await githubProjectRepository.SetProjectImage(form.Id, imageUrl);
 
-                return Ok($"{project.Name}: {imageUrl}");
+                return Ok();
             }
         }
 
@@ -71,6 +71,13 @@ namespace PersonalWebsiteWebApi.Controllers
         {
             if (await githubProjectRepository.ChangeDisplay(form.Id, form.Display)) return Ok();
             return BadRequest();
+        }
+
+        [HttpGet("display")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<IEnumerable<ProjectShowDisplayDto>>> ShowDisplay()
+        {
+            return Ok(await githubProjectRepository.ShowDisplay());
         }
     }
 }

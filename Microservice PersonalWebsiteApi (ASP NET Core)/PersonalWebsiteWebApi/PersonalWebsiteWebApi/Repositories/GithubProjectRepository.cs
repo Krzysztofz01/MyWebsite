@@ -12,6 +12,7 @@ namespace PersonalWebsiteWebApi.Repositories
         Task<GithubProject> GetProjectById(int id);
         Task<List<GithubProject>> GetProjects();
         Task<bool> ChangeDisplay(int id, bool display);
+        Task<IEnumerable<ProjectShowDisplayDto>> ShowDisplay();
         Task PushProjects(IEnumerable<GithubProject> projects);
         Task<bool> SetProjectImage(int id, string imageUrl);
     }
@@ -51,6 +52,23 @@ namespace PersonalWebsiteWebApi.Repositories
                 return true;
             }
             return false;
+        }
+
+        public async Task<IEnumerable<ProjectShowDisplayDto>> ShowDisplay()
+        {
+            var projects = await context.GithubProjects.ToListAsync();
+            var dtoContainer = new List<ProjectShowDisplayDto>();
+            foreach (var project in projects)
+            {
+                dtoContainer.Add(new ProjectShowDisplayDto()
+                {
+                    Id = project.Id,
+                    Name = project.Name,
+                    ImageUrl = project.ImageUrl,
+                    Display = project.Display
+                });
+            }
+            return dtoContainer;
         }
 
         public async Task PushProjects(IEnumerable<GithubProject> projects)

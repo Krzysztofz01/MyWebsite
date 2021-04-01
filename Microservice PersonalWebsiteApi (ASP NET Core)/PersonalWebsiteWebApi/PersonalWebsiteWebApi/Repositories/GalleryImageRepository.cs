@@ -12,6 +12,7 @@ namespace PersonalWebsiteWebApi.Repositories
         Task<bool> AddImage(GalleryImage image);
         Task<bool> DeleteImage(int id);
         Task<bool> ChangeDisplay(int id, bool display);
+        Task<IEnumerable<GalleryShowDisplayDto>> ShowDisplay();
         Task<string> GetRepoImageUrl(string name);
         Task<IEnumerable<GalleryImageDto>> GetAllImages();
     }
@@ -63,6 +64,23 @@ namespace PersonalWebsiteWebApi.Repositories
                 return true;
             }
             return false;
+        }
+
+        public async Task<IEnumerable<GalleryShowDisplayDto>> ShowDisplay()
+        {
+            var images = await context.GalleryImages.Where(x => x.Category != "Repo").ToListAsync();
+            var dtoContainer = new List<GalleryShowDisplayDto>();
+
+            foreach(var image in images)
+            {
+                dtoContainer.Add(new GalleryShowDisplayDto()
+                {
+                    Id = image.Id,
+                    Name = image.Name,
+                    Display = image.Display
+                });
+            }
+            return dtoContainer;
         }
 
         public async Task<IEnumerable<GalleryImageDto>> GetAllImages()
