@@ -11,6 +11,9 @@ import { AnimatedDigitComponent } from './layout/animated-digit/animated-digit.c
 import { PageMainComponent } from './layout/page-main/page-main.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PageGalleryComponent } from './layout/page-gallery/page-gallery.component';
+import { PageAuthComponent } from './layout/page-auth/page-auth.component';
+import { PageAdminComponent } from './layout/page-admin/page-admin.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,12 +24,15 @@ import { PageGalleryComponent } from './layout/page-gallery/page-gallery.compone
     SocialmediaSectionComponent,
     AnimatedDigitComponent,
     PageMainComponent,
-    PageGalleryComponent
+    PageGalleryComponent,
+    PageAuthComponent,
+    PageAdminComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [ApiCommunicationService],
   bootstrap: [AppComponent]

@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="row mt-5">
+        <div class="col mt-5">
+            <form [formGroup]="loginFormGroup" (ngSubmit)="loginSubmit()">
+                <input type="email" class="form-control my-2" placeholder="Email address" formControlName="email">
+                <input type="password" class="form-control my-2" placeholder="Password" formControlName="password">
+                <button type="submit" class="btn btn-primary my-2">Sign in</button>
+            </form>
+        </div>
+    </div>
+</div>

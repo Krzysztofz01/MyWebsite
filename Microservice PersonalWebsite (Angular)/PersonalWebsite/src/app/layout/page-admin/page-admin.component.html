@@ -1,0 +1,57 @@
+<div class="container-fluid">
+    <div class="row mt-5 text-center">
+        <div class="col-6 mt-3">
+            <h2>Admin panel</h2>
+            <button class="btn btn-primary" (click)="logout()">Logout</button>
+        </div>
+        <div class="col-6 mt-3">
+            <h2>Upload image to gallery</h2>
+            <form [formGroup]="galleryUploadGroup" (ngSubmit)="gallerySubmit()">
+                <input type="text" class="form-control my-2" placeholder="Picture name" formControlName="name">
+                <input type="text" class="form-control my-2" placeholder="Picture category" formControlName="category">
+                <input type="file" class="form-control-file my-2" placeholder="Picture name" formControlName="image" (change)="onGalleryImageSelect($event)">
+                <button type="submit" class="btn btn-primary my-2">Upload</button>
+            </form>
+        </div>
+    </div>
+    <div class="row mt-5 text-center">
+        <div class="col-6">
+            <h2>Projects</h2>
+            <table class="table">
+                <thead>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Display</th>
+                    <th>Update image</th>
+                    <th>Change display</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let p of projects">
+                        <td>{{ p.name }}</td>
+                        <td>{{ p.imageUrl }}</td>
+                        <td>{{ (p.display == true) ? "Visible" : "Hidden" }}</td>
+                        <td><input class="form-control-file" type="file" (change)="updateProjectImage($event, p.id)"></td>
+                        <td><button class="btn btn-primary mx-1" (click)="projectDisplay(p.id)">{{ (p.display == true) ? "Hide" : "Show" }}</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-6">
+            <h2>Gallery</h2>
+            <table class="table">
+                <thead>
+                    <th>Name</th>
+                    <th>Display</th>
+                    <th>Change display</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let i of images">
+                        <td>{{ i.name }}</td>
+                        <td>{{ (i.display == true) ? "Visible" : "Hidden" }}</td>
+                        <td><button class="btn btn-primary mx-1" (click)="imageDisplay(i.id)">{{ (i.display == true) ? "Hide" : "Show" }}</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

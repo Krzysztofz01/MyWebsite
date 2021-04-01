@@ -22,6 +22,10 @@ export class PageGalleryComponent implements OnInit {
     if(images == null) {
       this.apiService.getGalleryImages()
         .subscribe((response) => {
+          response.forEach(x => {
+            x.url = `${ environment.apiBaseUrl }${ x.url }`;
+          });
+
           this.imagesContainer = response;
           this.cacheService.delete(environment.CACHE_IMAGE_ARRAY);
           this.cacheService.save({
@@ -49,9 +53,5 @@ export class PageGalleryComponent implements OnInit {
       if(ctg == "design") return true;
       return false;
     }
-  }
-
-  public combineUrl(path: string): string {
-    return `${ environment.apiBaseUrl }/${ path }`;
   }
 }

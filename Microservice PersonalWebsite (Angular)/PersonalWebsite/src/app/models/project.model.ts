@@ -8,4 +8,5 @@ export interface Project {
     language: string;
     projectCreated: string;
     projectUpdated: string;
+    display: boolean;
 }

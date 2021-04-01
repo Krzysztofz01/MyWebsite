@@ -21,14 +21,14 @@ export class ProjectSectionComponent implements OnInit {
       this.apiService.getGithubProjects()
         .subscribe((response) => {
           response.forEach(x => {
-            x.imageUrl = `/assets/${ x.name.toLowerCase() }.jpg`;
-            
             const liveProject = environment.liveProjects.find(p => p.name == x.name.toLowerCase());
             if(liveProject != null) {
               x.liveUrl = liveProject.url;
             } else {
               x.liveUrl = null
             }
+            
+            x.imageUrl = `${ environment.apiBaseUrl }${ x.imageUrl }`;
           });
 
           this.projectsContainer = response;
