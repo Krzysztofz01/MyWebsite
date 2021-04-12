@@ -68,6 +68,17 @@ body {
     padding: 10px;
 }
 
+.border-container-small {
+    width: max-content;
+    margin: auto;
+    border: 2px solid #fff;
+    padding: 10px;
+}
+
+.border-container-small h5{
+    font-size: 28px !important;
+}
+
 .carousel-caption h5 {
     text-align: center;
     font-size: 48px;

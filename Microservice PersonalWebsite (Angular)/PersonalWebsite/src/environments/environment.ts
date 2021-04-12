@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  //apiBaseUrl: "http://localhost:3101",
-  apiBaseUrl: "http://localhost:55710",
+  apiBaseUrl: "http://localhost:3101",
   CACHE_IMAGE_ARRAY: 'IMAGE_ARRAY',
   CACHE_GITHUB_ARRAY: 'PROJECTS_ARRAY',
   CAHCE_JWT: 'JWT',
